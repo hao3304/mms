@@ -13,7 +13,7 @@ public class XmlBuilder {
         JAXBContext context = JAXBContext.newInstance(clazz);
         Unmarshaller unmarshaller = context.createUnmarshaller();
         reader = new StringReader(xmlStr);
-        unmarshaller.unmarshal(reader);
+        xmlObject = unmarshaller.unmarshal(reader);
 
         if(null != reader) {
             reader.close();

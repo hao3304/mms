@@ -13,12 +13,12 @@ public class HelloController {
     @Autowired
     private WeatherDataService weatherDataService;
 
-    @GetMapping("/weather/name/{name}")
+    @GetMapping("/templates/weather/name/{name}")
     public WeatherResponse getWeather(@PathVariable("name") String name) {
         return weatherDataService.getDataByCityName(name);
     }
 
-    @GetMapping("/weather/id/{id}")
+    @GetMapping("/templates/weather/id/{id}")
     public WeatherResponse getWeatherById(@PathVariable("id") String id) {
         return weatherDataService.getDataByCityId(id);
     }

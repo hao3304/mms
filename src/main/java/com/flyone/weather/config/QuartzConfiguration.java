@@ -21,7 +21,7 @@ public class QuartzConfiguration {
     public Trigger weatherDataSyncTrigger() {
         SimpleScheduleBuilder scheduleBuilder = SimpleScheduleBuilder
                 .simpleSchedule()
-                .withIntervalInSeconds(2)
+                .withIntervalInMinutes(10)
                 .repeatForever();
 
         return TriggerBuilder

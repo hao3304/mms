@@ -54,16 +54,34 @@ public class WeatherDataServiceImpl implements WeatherDataService {
                 strBody = repStr.getBody();
                 ops.set(uri, strBody, 10, TimeUnit.SECONDS);
             }
-
         }
 
         try {
             resp = mapper.readValue(strBody, WeatherResponse.class);
         } catch (IOException e) {
-//            e.printStackTrace();
             logger.error("Error",e);
         }
 
         return  resp;
+    }
+
+
+    @Override
+    public void syncDataByCityId(String cityId) {
+        String uri = WEATHER_URI + "?citykey=" + cityId;
+        this.saveWeatherData(uri);
+    }
+
+    private void saveWeatherData(String uri) {
+        String strBody = null;
+        ObjectMapper mapper = new ObjectMapper();
+        ValueOperations<String,String> ops = stringRedisTemplate.opsForValue();
+
+        ResponseEntity<String> repStr = restTemplate.getForEntity(uri, String.class);
+        if(repStr.getStatusCodeValue() == 200) {
+            strBody = repStr.getBody();
+            ops.set(uri, strBody);
+        }
+
     }
 }
